@@ -21,6 +21,7 @@ export const Form = styled.form`
 export const Input = styled.input`
   padding: 8px 25px;
   border-radius: 10px;
+  max-width: 217px;
   border: 1px solid #2f2f2f;
   font-family: "Fira Code";
   margin-bottom: 10px;

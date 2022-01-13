@@ -10,14 +10,12 @@ import {
   Item,
   EmptyList,
   ButtonDeleted,
-  IconEdit, 
+  IconEdit,
   IconDeleted,
 } from "./styles";
 
-import { IoIosRemoveCircleOutline } from 'react-icons/io';
-import { AiOutlineEdit } from 'react-icons/ai';
-
-
+import { IoIosRemoveCircleOutline } from "react-icons/io";
+import { AiOutlineEdit } from "react-icons/ai";
 
 function App() {
   /**
@@ -61,16 +59,16 @@ function App() {
   /**
    * Editar um item da lista
    */
-  function handleEditItem() {}
+  function handleEditItem(item) {
+    console.log(item);
+  }
 
   /**
    * Remover apenas um item da lista
    */
-  function handleRemoveOneItem(item) {
-    itemList.splice(item, 1)
-    console.log(itemList)
-    setItemList([...itemList])
-    setValue('')
+  function handleRemoveOneItem(index) {
+    itemList.splice(index, 1);
+    setItemList([...itemList]);
   }
 
   return (
@@ -97,18 +95,18 @@ function App() {
       <Title>items</Title>
       <ListItem>
         {itemList.length > 0 ? (
-          itemList.map((item) => {
-            return(
-              <Item key={item}>
+          itemList.map((item, index) => {
+            return (
+              <Item key={index}>
                 {item}
-                <IconEdit>
+                <IconEdit onClick={() => handleEditItem(item)}>
                   <AiOutlineEdit />
                 </IconEdit>
-                <IconDeleted onClickCapture={() => handleRemoveOneItem(item)}>
+                <IconDeleted onClickCapture={() => handleRemoveOneItem(index)}>
                   <IoIosRemoveCircleOutline />
                 </IconDeleted>
               </Item>
-            ) 
+            );
           })
         ) : (
           <EmptyList>your list is empty :(</EmptyList>
