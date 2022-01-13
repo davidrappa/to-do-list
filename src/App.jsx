@@ -26,6 +26,18 @@ function App() {
   const [itemList, setItemList] = React.useState([]);
 
   /**
+   * Pega os items que estao no localstorage
+   */
+  useEffect(() => {
+    if (localStorage.getItem('items') !== null) {
+      setItemList(JSON.parse(localStorage.getItem('items')));
+    } else {
+      setItemList(localStorage.setItem('items', JSON.stringify(([...itemList]))));
+      return false;
+    }
+  }, [])
+
+  /**
    * Obtem o valor do input
    */
   function handleChangeInput(event) {
@@ -39,9 +51,10 @@ function App() {
   function handleAddItem(event) {
     event.preventDefault();
     if (value) {
-      setItemList([...itemList, value]);
       setValue("");
       setError(null);
+      localStorage.setItem('items' , JSON.stringify([...itemList, value]))
+      setItemList([...itemList, value]);
       return true;
     } else {
       setError("Preencha o campo!");
@@ -53,7 +66,13 @@ function App() {
    * Limpa a lista total
    */
   function handleDeletedItems() {
-    setItemList([]);
+    if(itemList.length > 0) {
+      setItemList([]);
+      localStorage.setItem('items', JSON.stringify([]))
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -69,6 +88,7 @@ function App() {
   function handleRemoveOneItem(index) {
     itemList.splice(index, 1);
     setItemList([...itemList]);
+    localStorage.setItem('items', JSON.stringify([...itemList]))
   }
 
   return (

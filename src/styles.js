@@ -77,7 +77,7 @@ export const ButtonDeleted = styled.button`
   }
 `;
 export const ListItem = styled.ul`
-  width: 250px;
+  width: 370px;
   border-radius: 10px;
   padding: 12px;
   margin-left: auto;
